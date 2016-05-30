@@ -47,9 +47,9 @@ INSERT INTO lkp_user_type (name) VALUES ("admin");
 INSERT INTO lkp_user_type (name) VALUES ("student");
 INSERT INTO lkp_user_type (name) VALUES ("professor");
                                                                         /* password = password*/
-INSERT INTO users (password, fname, lname, email,user_type_id) VALUES ("$2a$10$JofcKIcaYmEaFudtzfuAfuFpwLPe3t/czs/cKdsz0IEdieXmWnu76", "test", "admin", "test-admin@email.com", 1);
 INSERT INTO users (password, fname, lname, email,user_type_id) VALUES ("$2a$10$JofcKIcaYmEaFudtzfuAfuFpwLPe3t/czs/cKdsz0IEdieXmWnu76", "test", "student", "test-student@email.com", 2);
 INSERT INTO users (password, fname, lname, email,user_type_id) VALUES ("$2a$10$JofcKIcaYmEaFudtzfuAfuFpwLPe3t/czs/cKdsz0IEdieXmWnu76", "test", "prof", "test-prof@email.com", 3);
+INSERT INTO users (password, fname, lname, email,user_type_id) VALUES ("$2a$10$JofcKIcaYmEaFudtzfuAfuFpwLPe3t/czs/cKdsz0IEdieXmWnu76", "test", "admin", "test-admin@email.com", 1);
 
 INSERT INTO courses (name, description) VALUES ("testCourse", "testDescription");
 INSERT INTO courses (name, description) VALUES ("testCourse2", "testDescription2");
