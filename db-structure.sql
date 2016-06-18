@@ -56,10 +56,9 @@ INSERT INTO users (id, password, fname, lname, email,user_type_id) VALUES ("id5"
 INSERT INTO users (id, password, fname, lname, email,user_type_id) VALUES ("id6","$2a$10$JofcKIcaYmEaFudtzfuAfuFpwLPe3t/czs/cKdsz0IEdieXmWnu76", "test", "prof2", "test-prof2@email.com", "3");
 INSERT INTO users (id, password, fname, lname, email,user_type_id) VALUES ("id7","$2a$10$JofcKIcaYmEaFudtzfuAfuFpwLPe3t/czs/cKdsz0IEdieXmWnu76", "test", "admin", "test-admin@email.com", "1");
 
-INSERT INTO courses (id, name, description) VALUES ("cid1","COMPSCI590C", "testDescription");
-INSERT INTO courses (id, name, description) VALUES ("cid2","COMPSCI677", "testDescription2");
-INSERT INTO courses (id, name, description) VALUES ("cid3","COMPSCI683", "testDescription3");
-INSERT INTO courses (id, name, description) VALUES ("cid4","COMPSCI690P", "testDescription4");
+INSERT INTO courses (id, name, description) VALUES ("cid1","COMP666", "testDescription");
+INSERT INTO courses (id, name, description) VALUES ("cid2","COMP777", "testDescription2");
+INSERT INTO courses (id, name, description) VALUES ("cid3","COMP888", "testDescription3");
 
 INSERT INTO lkp_course_users (course_id,user_id) VALUES ("cid1","id1");
 INSERT INTO lkp_course_users (course_id,user_id) VALUES ("cid1","id2");
@@ -75,6 +74,3 @@ INSERT INTO lkp_course_users (course_id,user_id) VALUES ("cid2","id6");
 INSERT INTO lkp_course_users (course_id,user_id) VALUES ("cid3","id1");
 INSERT INTO lkp_course_users (course_id,user_id) VALUES ("cid3","id2");
 INSERT INTO lkp_course_users (course_id,user_id) VALUES ("cid3","id5");
-
-INSERT INTO lkp_course_users (course_id,user_id) VALUES ("cid4","id1");
-INSERT INTO lkp_course_users (course_id,user_id) VALUES ("cid4","id6");
