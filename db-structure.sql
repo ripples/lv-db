@@ -2,6 +2,7 @@ DROP TABLE IF EXISTS lkp_course_users;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS courses;
 DROP TABLE IF EXISTS lkp_user_type;
+DROP TABLE IF EXISTS semesters;
 
 CREATE TABLE lkp_user_type (
   user_type_id INTEGER NOT NULL AUTO_INCREMENT,
@@ -23,13 +24,20 @@ CREATE TABLE users (
   FOREIGN KEY (user_type_id) REFERENCES lkp_user_type (user_type_id)
 );
 
+CREATE TABLE semesters (
+  id VARCHAR(60) NOT NULL,
+  start_dtm TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  end_dtm TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (id)
+);
+
 CREATE TABLE courses (
   id VARCHAR(60) NOT NULL,
   name VARCHAR(60) NOT NULL,
   description VARCHAR(1000) DEFAULT NULL,
-  start_dtm TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  end_dtm TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (id)
+  semester_id VARCHAR(60) NOT NULL,
+  PRIMARY KEY (id),
+  FOREIGN KEY (semester_id) REFERENCES semesters (id)
 );
 
 CREATE TABLE lkp_course_users (
@@ -56,21 +64,23 @@ INSERT INTO users (id, password, fname, lname, email,user_type_id) VALUES ("id5"
 INSERT INTO users (id, password, fname, lname, email,user_type_id) VALUES ("id6","$2a$10$JofcKIcaYmEaFudtzfuAfuFpwLPe3t/czs/cKdsz0IEdieXmWnu76", "test", "prof2", "test-prof2@email.com", "3");
 INSERT INTO users (id, password, fname, lname, email,user_type_id) VALUES ("id7","$2a$10$JofcKIcaYmEaFudtzfuAfuFpwLPe3t/czs/cKdsz0IEdieXmWnu76", "test", "admin", "test-admin@email.com", "1");
 
-INSERT INTO courses (id, name, description) VALUES ("cid1","COMP666", "testDescription");
-INSERT INTO courses (id, name, description) VALUES ("cid2","COMP777", "testDescription2");
-INSERT INTO courses (id, name, description) VALUES ("cid3","COMP888", "testDescription3");
+INSERT INTO semesters(id) VALUES ("S16");
 
-INSERT INTO lkp_course_users (course_id,user_id) VALUES ("cid1","id1");
-INSERT INTO lkp_course_users (course_id,user_id) VALUES ("cid1","id2");
-INSERT INTO lkp_course_users (course_id,user_id) VALUES ("cid1","id3");
-INSERT INTO lkp_course_users (course_id,user_id) VALUES ("cid1","id4");
-INSERT INTO lkp_course_users (course_id,user_id) VALUES ("cid1","id5");
+INSERT INTO courses (id, name, description, semester_id) VALUES ("cid1","COMP666", "testDescription", "S16");
+INSERT INTO courses (id, name, description, semester_id) VALUES ("cid2","COMP777", "testDescription2", "S16");
+INSERT INTO courses (id, name, description, semester_id) VALUES ("cid3","COMP888", "testDescription3", "S16");
 
-INSERT INTO lkp_course_users (course_id,user_id) VALUES ("cid2","id1");
-INSERT INTO lkp_course_users (course_id,user_id) VALUES ("cid2","id2");
-INSERT INTO lkp_course_users (course_id,user_id) VALUES ("cid2","id3");
-INSERT INTO lkp_course_users (course_id,user_id) VALUES ("cid2","id6");
+INSERT INTO lkp_course_users (course_id, user_id) VALUES ("cid1","id1");
+INSERT INTO lkp_course_users (course_id, user_id) VALUES ("cid1","id2");
+INSERT INTO lkp_course_users (course_id, user_id) VALUES ("cid1","id3");
+INSERT INTO lkp_course_users (course_id, user_id) VALUES ("cid1","id4");
+INSERT INTO lkp_course_users (course_id, user_id) VALUES ("cid1","id5");
 
-INSERT INTO lkp_course_users (course_id,user_id) VALUES ("cid3","id1");
-INSERT INTO lkp_course_users (course_id,user_id) VALUES ("cid3","id2");
-INSERT INTO lkp_course_users (course_id,user_id) VALUES ("cid3","id5");
+INSERT INTO lkp_course_users (course_id, user_id) VALUES ("cid2","id1");
+INSERT INTO lkp_course_users (course_id, user_id) VALUES ("cid2","id2");
+INSERT INTO lkp_course_users (course_id, user_id) VALUES ("cid2","id3");
+INSERT INTO lkp_course_users (course_id, user_id) VALUES ("cid2","id6");
+
+INSERT INTO lkp_course_users (course_id, user_id) VALUES ("cid3","id1");
+INSERT INTO lkp_course_users (course_id, user_id) VALUES ("cid3","id2");
+INSERT INTO lkp_course_users (course_id, user_id) VALUES ("cid3","id5");
