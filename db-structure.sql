@@ -147,6 +147,14 @@ INSERT INTO courses (id, name, description, semester_id) VALUES ('cid40', 'RLS45
 
 /* students of the courses*/
 INSERT INTO lkp_course_users (course_id, user_id) VALUES ("cid1","id1");
+INSERT INTO lkp_course_users (course_id, user_id) VALUES ("cid15","id1");
+INSERT INTO lkp_course_users (course_id, user_id) VALUES ("cid16","id1");
+INSERT INTO lkp_course_users (course_id, user_id) VALUES ("cid17","id1");
+INSERT INTO lkp_course_users (course_id, user_id) VALUES ("cid18","id1");
+INSERT INTO lkp_course_users (course_id, user_id) VALUES ("cid19","id1");
+INSERT INTO lkp_course_users (course_id, user_id) VALUES ("cid14","id1");
+INSERT INTO lkp_course_users (course_id, user_id) VALUES ("cid13","id1");
+INSERT INTO lkp_course_users (course_id, user_id) VALUES ("cid12","id1");
 INSERT INTO lkp_course_users (course_id, user_id) VALUES ("cid1","id2");
 INSERT INTO lkp_course_users (course_id, user_id) VALUES ("cid1","id3");
 INSERT INTO lkp_course_users (course_id, user_id) VALUES ("cid1","id4");
