@@ -1,4 +1,5 @@
 DROP TABLE IF EXISTS lkp_course_users;
+DROP TABLE IF EXISTS lkp_user_reset_token_hash;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS courses;
 DROP TABLE IF EXISTS lkp_user_type;
@@ -20,8 +21,19 @@ CREATE TABLE users (
   update_dtm TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   last_login_dtm TIMESTAMP NULL,
   verified BIT NOT NULL DEFAULT 0,
+  pw_reset_needed BIT NOT NULL DEFAULT 0,
   PRIMARY KEY (id),
   FOREIGN KEY (user_type_id) REFERENCES lkp_user_type (user_type_id)
+);
+
+CREATE TABLE lkp_user_reset_token_hash (
+  id INTEGER NOT NULL AUTO_INCREMENT,
+  reset_key_hash VARCHAR(60) NOT NULL,
+  user_email VARCHAR(60) NOT NULL,
+  expire_dtm TIMESTAMP NOT NULL,
+  valid BIT NOT NULL DEFAULT 1,
+  PRIMARY KEY (id),
+  FOREIGN KEY (user_email) REFERENCES users (email)
 );
 
 CREATE TABLE semesters (
@@ -51,6 +63,8 @@ CREATE TABLE lkp_course_users (
 );
 
 CREATE INDEX idx_users_email ON users (email ASC);
+CREATE INDEX idx_lkp_user_reset_token_hash_users_email ON lkp_user_reset_token_hash (user_email ASC);
+
 
 /************************************** TEST DATA ***************************************************/
 INSERT INTO lkp_user_type (name) VALUES ("admin");
