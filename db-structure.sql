@@ -26,9 +26,8 @@ CREATE TABLE users (
   FOREIGN KEY (user_type_id) REFERENCES lkp_user_type (user_type_id)
 );
 
-CREATE TABLE lkp_user_reset_token_hash (
+CREATE TABLE lkp_user_reset_token_id (
   id INTEGER NOT NULL AUTO_INCREMENT,
-  reset_key_hash VARCHAR(60) NOT NULL,
   user_email VARCHAR(60) NOT NULL,
   expire_dtm TIMESTAMP NOT NULL,
   valid BIT NOT NULL DEFAULT 1,
@@ -63,7 +62,7 @@ CREATE TABLE lkp_course_users (
 );
 
 CREATE INDEX idx_users_email ON users (email ASC);
-CREATE INDEX idx_lkp_user_reset_token_hash_users_email ON lkp_user_reset_token_hash (user_email ASC);
+CREATE INDEX idx_lkp_user_reset_token_hash_users_email ON lkp_user_reset_token_id (user_email ASC);
 
 
 /************************************** TEST DATA ***************************************************/
