@@ -15,21 +15,19 @@ CREATE TABLE users (
   id VARCHAR(60) NOT NULL,
   password VARCHAR(60) NOT NULL,
   email VARCHAR(255) NOT NULL UNIQUE,
-  fname VARCHAR(60) NOT NULL,
-  lname VARCHAR(60) NOT NULL,
+  fname VARCHAR(60),
+  lname VARCHAR(60),
   user_type_id INTEGER NOT NULL DEFAULT 2,
   update_dtm TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   last_login_dtm TIMESTAMP NULL,
-  verified BIT NOT NULL DEFAULT 0,
-  pw_reset_needed BIT NOT NULL DEFAULT 0,
+  password_reset_required BIT NOT NULL DEFAULT 0,
   PRIMARY KEY (id),
   FOREIGN KEY (user_type_id) REFERENCES lkp_user_type (user_type_id)
 );
 
-CREATE TABLE lkp_user_reset_token_id (
+CREATE TABLE lkp_user_reset_token_ids (
   id INTEGER NOT NULL AUTO_INCREMENT,
   user_email VARCHAR(60) NOT NULL,
-  expire_dtm TIMESTAMP NOT NULL,
   valid BIT NOT NULL DEFAULT 1,
   PRIMARY KEY (id),
   FOREIGN KEY (user_email) REFERENCES users (email)
@@ -62,7 +60,7 @@ CREATE TABLE lkp_course_users (
 );
 
 CREATE INDEX idx_users_email ON users (email ASC);
-CREATE INDEX idx_lkp_user_reset_token_hash_users_email ON lkp_user_reset_token_id (user_email ASC);
+CREATE INDEX idx_lkp_user_reset_token_hash_users_email ON lkp_user_reset_token_ids (user_email ASC);
 
 
 /************************************** TEST DATA ***************************************************/
