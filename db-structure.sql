@@ -21,6 +21,7 @@ CREATE TABLE users (
   update_dtm TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   last_login_dtm TIMESTAMP NULL,
   password_reset_required BIT NOT NULL DEFAULT 0,
+  invited BIT NOT NULL DEFAULT 0,
   PRIMARY KEY (id),
   FOREIGN KEY (user_type_id) REFERENCES lkp_user_type (user_type_id)
 );
