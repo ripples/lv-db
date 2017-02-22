@@ -12,15 +12,14 @@ CREATE TABLE lkp_user_type (
 );
 
 CREATE TABLE users (
-  id VARCHAR(60) NOT NULL,
-  password VARCHAR(60) NOT NULL,
+  id INTEGER NOT NULL AUTO_INCREMENT,
+  password VARCHAR(60) NULL,
   email VARCHAR(255) NOT NULL UNIQUE,
-  fname VARCHAR(60),
-  lname VARCHAR(60),
+  fname VARCHAR(60) NULL,
+  lname VARCHAR(60) NULL,
   user_type_id INTEGER NOT NULL DEFAULT 2,
   update_dtm TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   last_login_dtm TIMESTAMP NULL,
-  password_reset_required BIT NOT NULL DEFAULT 0,
   invited BIT NOT NULL DEFAULT 0,
   PRIMARY KEY (id),
   FOREIGN KEY (user_type_id) REFERENCES lkp_user_type (user_type_id)
@@ -43,8 +42,8 @@ CREATE TABLE semesters (
 
 CREATE TABLE courses (
   id VARCHAR(60) NOT NULL,
-  name VARCHAR(60) NOT NULL,
-  description VARCHAR(1000) DEFAULT NULL,
+  name VARCHAR(60) NULL,
+  description VARCHAR(1000) NULL,
   semester_id VARCHAR(60) NOT NULL,
   PRIMARY KEY (id, semester_id),
   FOREIGN KEY (semester_id) REFERENCES semesters (id)
@@ -54,10 +53,11 @@ CREATE TABLE lkp_course_users (
   id INTEGER NOT NULL AUTO_INCREMENT,
   course_id VARCHAR(60) NOT NULL,
   semester_id VARCHAR(60) NOT NULL,
-  user_id VARCHAR(60) NOT NULL,
+  user_id INTEGER NOT NULL,
   PRIMARY KEY (id),
   FOREIGN KEY (course_id, semester_id) REFERENCES courses (id, semester_id),
-  FOREIGN KEY (user_id) REFERENCES users (id)
+  FOREIGN KEY (user_id) REFERENCES users (id),
+  UNIQUE KEY (course_id, semester_id, user_id)
 );
 
 CREATE INDEX idx_users_email ON users (email ASC);
