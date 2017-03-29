@@ -2,13 +2,13 @@ DROP TABLE IF EXISTS lkp_course_users;
 DROP TABLE IF EXISTS lkp_user_reset_token_hash;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS courses;
-DROP TABLE IF EXISTS lkp_user_type;
+DROP TABLE IF EXISTS user_type;
 DROP TABLE IF EXISTS semesters;
 
-CREATE TABLE lkp_user_type (
-  user_type_id INTEGER NOT NULL AUTO_INCREMENT,
+CREATE TABLE user_type (
+  id INTEGER NOT NULL AUTO_INCREMENT,
   name VARCHAR(60) NOT NULL,
-  PRIMARY KEY (user_type_id)
+  PRIMARY KEY (id)
 );
 
 CREATE TABLE users (
@@ -17,12 +17,10 @@ CREATE TABLE users (
   email VARCHAR(255) NOT NULL UNIQUE,
   fname VARCHAR(60) NULL,
   lname VARCHAR(60) NULL,
-  user_type_id INTEGER NOT NULL DEFAULT 2,
   update_dtm TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   last_login_dtm TIMESTAMP NULL,
   invited BIT NOT NULL DEFAULT 0,
-  PRIMARY KEY (id),
-  FOREIGN KEY (user_type_id) REFERENCES lkp_user_type (user_type_id)
+  PRIMARY KEY (id)
 );
 
 CREATE TABLE lkp_user_reset_token_ids (
@@ -54,9 +52,11 @@ CREATE TABLE lkp_course_users (
   course_id VARCHAR(60) NOT NULL,
   semester_id VARCHAR(60) NOT NULL,
   user_id INTEGER NOT NULL,
+  user_type_id INTEGER NOT NULL DEFAULT 2,
   PRIMARY KEY (id),
   FOREIGN KEY (course_id, semester_id) REFERENCES courses (id, semester_id),
   FOREIGN KEY (user_id) REFERENCES users (id),
+  FOREIGN KEY (user_type_id) REFERENCES user_type (id),
   UNIQUE KEY (course_id, semester_id, user_id)
 );
 
@@ -65,9 +65,9 @@ CREATE INDEX idx_lkp_user_reset_token_hash_users_email ON lkp_user_reset_token_i
 
 
 /************************************** TEST DATA ***************************************************/
-INSERT INTO lkp_user_type (name) VALUES ("admin");
-INSERT INTO lkp_user_type (name) VALUES ("student");
-INSERT INTO lkp_user_type (name) VALUES ("professor");
+INSERT INTO user_type (name) VALUES ("admin");
+INSERT INTO user_type (name) VALUES ("student");
+INSERT INTO user_type (name) VALUES ("professor"); /* 3 */
 
                                                                         /* password = password*/
                                                                         /* type 2*/
