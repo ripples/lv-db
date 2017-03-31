@@ -2,10 +2,10 @@ DROP TABLE IF EXISTS lkp_course_users;
 DROP TABLE IF EXISTS lkp_user_reset_token_hash;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS courses;
-DROP TABLE IF EXISTS user_type;
+DROP TABLE IF EXISTS user_types;
 DROP TABLE IF EXISTS semesters;
 
-CREATE TABLE user_type (
+CREATE TABLE user_types (
   id INTEGER NOT NULL AUTO_INCREMENT,
   name VARCHAR(60) NOT NULL,
   PRIMARY KEY (id)
@@ -56,18 +56,16 @@ CREATE TABLE lkp_course_users (
   PRIMARY KEY (id),
   FOREIGN KEY (course_id, semester_id) REFERENCES courses (id, semester_id),
   FOREIGN KEY (user_id) REFERENCES users (id),
-  FOREIGN KEY (user_type_id) REFERENCES user_type (id),
+  FOREIGN KEY (user_type_id) REFERENCES user_types (id),
   UNIQUE KEY (course_id, semester_id, user_id)
 );
 
 CREATE INDEX idx_users_email ON users (email ASC);
 CREATE INDEX idx_lkp_user_reset_token_hash_users_email ON lkp_user_reset_token_ids (user_email ASC);
 
-
-/************************************** TEST DATA ***************************************************/
-INSERT INTO user_type (name) VALUES ("admin");
-INSERT INTO user_type (name) VALUES ("student");
-INSERT INTO user_type (name) VALUES ("professor"); /* 3 */
+INSERT INTO user_types (name) VALUES ("admin");
+INSERT INTO user_types (name) VALUES ("student");
+INSERT INTO user_types (name) VALUES ("professor"); /* 3 */
 
                                                                         /* password = password*/
                                                                         /* type 2*/
